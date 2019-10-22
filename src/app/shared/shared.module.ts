@@ -5,12 +5,13 @@ import { LogoComponent } from './logo/logo.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { InputComponent } from './input/input.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, LogoComponent, HeaderComponent, FooterComponent, InputComponent],
+  declarations: [ButtonComponent, LogoComponent, HeaderComponent, FooterComponent, InputComponent, BreadcrumbsComponent],
   imports: [
     CommonModule,
   ],
@@ -20,6 +21,7 @@ import { InputComponent } from './input/input.component';
     HeaderComponent,
     FooterComponent,
     InputComponent,
+    BreadcrumbsComponent,
   ]
 })
 export class SharedModule { }

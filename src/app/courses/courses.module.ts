@@ -5,11 +5,11 @@ import { CourseItemComponent } from './course-item/course-item.component';
 import { FilterFormComponent } from './filter-form/filter-form.component';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
-
+import { SearchInputComponent } from './filter-form/search-input/search-input.component';
 
 
 @NgModule({
-  declarations: [CoursesListComponent, CourseItemComponent, FilterFormComponent, CoursesPageComponent],
+  declarations: [CoursesListComponent, CourseItemComponent, FilterFormComponent, CoursesPageComponent, SearchInputComponent],
   imports: [
     CommonModule,
     SharedModule,
