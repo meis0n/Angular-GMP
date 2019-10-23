@@ -22,4 +22,4 @@ import { InputComponent } from './input/input.component';
     InputComponent,
   ]
 })
-export class CoreModule { }
+export class SharedModule { }

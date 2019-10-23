@@ -4,7 +4,7 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { FilterFormComponent } from './filter-form/filter-form.component';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
-import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,7 +12,7 @@ import { CoreModule } from '../core/core.module';
   declarations: [CoursesListComponent, CourseItemComponent, FilterFormComponent, CoursesPageComponent],
   imports: [
     CommonModule,
-    CoreModule,
+    SharedModule,
   ],
   exports: [
     CoursesPageComponent,
