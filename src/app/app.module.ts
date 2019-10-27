@@ -1,11 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoursesModule } from './courses/courses.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Routes, RouterModule } from '@angular/router';
+import { CoursesPageComponent } from './courses/courses-page/courses-page.component';
+
+const appRoutes: Routes = [
+  { path: '**', component: CoursesPageComponent }
+];
 
 @NgModule({
   declarations: [
@@ -14,6 +21,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    ),
     SharedModule,
     CoursesModule,
     FontAwesomeModule,

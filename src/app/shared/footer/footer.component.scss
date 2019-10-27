@@ -1,0 +1,13 @@
+@import '../../../styles';
+
+.footer {
+  background: $charcoal-grey-color;
+
+  &-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    color: #c0c3ce;
+    height: 64px;
+  }
+}

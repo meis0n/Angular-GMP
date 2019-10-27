@@ -1,20 +1,32 @@
 <div class="courses-item panel">
-  <div class="courses-item-info col-md-9">
-    <div class="courses-item-header">
-      <div class="courses-item-title mr-auto">
-        Video Course 1. Name
-      </div>
-      <div class="courses-item-additional-info">
-        <div class="courses-item-additional-info-item"><fa-icon class="icon" [icon]="faClock"></fa-icon> 1h 28 min</div>
-        <div class="courses-item-additional-info-item"><fa-icon class="icon" [icon]="faCalendarAlt"></fa-icon>9 Nov, 2019</div>
-      </div>
+    <div class="courses-item-info col-md-9">
+        <div class="courses-item-header">
+            <div class="courses-item-title mr-auto">
+                {{data.title}}
+            </div>
+            <div class="courses-item-additional-info">
+                <div class="courses-item-additional-info-item">
+                    <fa-icon class="icon" [icon]="faClock"></fa-icon>
+                    {{data.duration}}
+                </div>
+                <div class="courses-item-additional-info-item">
+                    <fa-icon class="icon" [icon]="faCalendarAlt"></fa-icon>
+                    {{data.creationDate}}
+                </div>
+            </div>
+        </div>
+        <div class="courses-item-description">
+            {{data.description}}
+        </div>
     </div>
-    <div class="courses-item-description">
-        Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.
+    <div class="courses-item-actions col-md-3">
+        <div class="button button--small button--secondary" (click)="onEdit($event)">
+            <fa-icon class="icon" [icon]="faPencilAlt"></fa-icon>
+            Edit
+        </div>
+        <div class="button button--small button--secondary" (click)="onDelete($event)">
+            <fa-icon class="icon" [icon]="faTrash"></fa-icon>
+            Delete
+        </div>
     </div>
-  </div>
-  <div class="courses-item-actions col-md-3">
-      <div class="button button--small button--secondary"><fa-icon class="icon" [icon]="faPencilAlt"></fa-icon> Edit</div>
-      <div class="button button--small button--secondary"><fa-icon class="icon" [icon]="faTrash"></fa-icon>Delete</div>
-  </div>
 </div>

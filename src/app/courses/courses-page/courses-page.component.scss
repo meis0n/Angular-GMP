@@ -1,9 +1,19 @@
+@import '../../../styles/index.scss';
+
 .courses-page {
     padding: 24px 15px;
 
-    &-actions{
+    &-actions {
       display: flex;
       flex-direction: row-reverse;
       margin-bottom: 12px;
+    }
+
+    &-more-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 48px;
+      font-size: $font-size-small;
     }
 }

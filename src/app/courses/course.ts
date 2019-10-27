@@ -1,7 +1,7 @@
 export interface Course {
-  creationDate: Date;
-  descrition: string;
-  duration: number;
+  creationDate: string;
+  description: string;
+  duration: string;
   id: string;
   title: string;
 }

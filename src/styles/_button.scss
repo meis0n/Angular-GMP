@@ -41,6 +41,11 @@
       padding: 5px 14px;
     }
 
+    &--link {
+      color: $soft-blue;
+      text-decoration: underline;
+    }
+
     .icon {
         margin-right: 10px;
     }
