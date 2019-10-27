@@ -5,27 +5,40 @@
     color: white;
     display: flex;
     align-items: center;
-    padding: 5px 14px;
+    padding: 11px 26px;
     border-radius: 3px;
+    cursor: pointer;
 
-    &-large {
-        font-size: 18px;
+    &--large {
+        font-size: $font-size-large;
         padding: 5px 24px;
         font-weight: 500;
     }
 
-    &-small {
-        font-size: 12px;
+    &--small {
+        font-size: $font-size-small;
         height: 24px;
         padding: 5px 18px;
     }
-    
-    &-primary {
+
+    &--primary {
         background-color: $sick-green;
+
+       &:hover {
+          background-color: #86a532;
+       }
     }
 
-    &-secondary {
-        background-color: $dark-sky-blue;
+    &--secondary {
+      background-color: $dark-sky-blue;
+
+      &:hover {
+          background-color: #10616d;
+      }
+    }
+
+    &--transparent {
+      padding: 5px 14px;
     }
 
     .icon {

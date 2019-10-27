@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPencilAlt, faCalendarAlt, faClock, faTrash, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-course-item',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-item.component.scss']
 })
 export class CourseItemComponent implements OnInit {
+  faPencilAlt: IconDefinition = faPencilAlt;
+  faTrash: IconDefinition = faTrash;
+  faCalendarAlt: IconDefinition = faCalendarAlt;
+  faClock: IconDefinition = faClock;
 
   constructor() { }
 

@@ -4,11 +4,36 @@
     margin-bottom: 24px;
     display: flex;
 
+    &-header {
+      display: flex;
+    }
+
     &-title {
         font-size: 24px;
         font-weight: 600;
         color: $dark;
         margin-bottom: 11px;
+    }
+
+    &-additional-info {
+      display: flex;
+      align-items: center;
+      color: #b9bdce;
+      font-size: $font-size-small;
+      align-items: center;
+
+      &-item {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          margin-right: 8px;
+        }
+
+        &:not(:last-of-type) {
+          margin-right: 16px;
+        }
+      }
     }
 
     &-description {

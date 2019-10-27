@@ -3,6 +3,9 @@
     width: 16px;
     background-repeat: no-repeat;
     background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &-search {
         background-image: url('/assets/icons/ic-search.svg');
