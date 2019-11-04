@@ -1,7 +1,7 @@
 <div class="courses-page container">
     <app-filter-form></app-filter-form>
     <div class="courses-page-actions">
-      <div class="button button--secondary" (click)="addCourse($event)"><fa-icon class="icon" [icon]="faPlus"></fa-icon>Add course</div>
+      <div data-test-id="AddCourse" class="button button--secondary" (click)="addCourse($event)"><fa-icon class="icon" [icon]="faPlus"></fa-icon>Add course</div>
     </div>
     <ul>
       <li *ngFor="let course of courses">
