@@ -1,9 +1,9 @@
 import { Course } from './course';
 
 export class CourseItem implements Course {
-  creationDate: Date;
-  descrition: string;
-  duration: number;
+  creationDate: string;
+  description: string;
+  duration: string;
   id: string;
   title: string;
 }

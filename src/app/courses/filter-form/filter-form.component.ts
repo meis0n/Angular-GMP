@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filter-form.component.scss']
 })
 export class FilterFormComponent implements OnInit {
+  public searchValue = '';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  search () {
+    console.log(this.searchValue);
   }
 
 }

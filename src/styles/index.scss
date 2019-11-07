@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~reset-css/sass/reset';
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+@import './variables';
+@import './icons';
+@import './button';
+@import './panel';
+@import './input';
+/* colors */
+
+/* ВОПРОС: Где мы должны пистаь глобальные стили, в styles.scss или app-компоненте */
+
+body {
+    font-family: Source Sans Pro;
+    font-size: $font-size;
+    font-weight: 300;
+    background-color: $pale-gray-two-color;
+}
+
+li {
+  list-style-type: none;
+}

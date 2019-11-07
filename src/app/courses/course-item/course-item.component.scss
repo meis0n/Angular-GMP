@@ -1,0 +1,56 @@
+@import '../../../styles/variables';
+
+.courses-item {
+    margin-bottom: 24px;
+    display: flex;
+
+    &-header {
+      display: flex;
+    }
+
+    &-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: $dark;
+        margin-bottom: 11px;
+    }
+
+    &-additional-info {
+      display: flex;
+      align-items: center;
+      color: $cloudy-blue;
+      font-size: $font-size-small;
+      align-items: center;
+
+      &-item {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          margin-right: 8px;
+        }
+
+        &:not(:last-of-type) {
+          margin-right: 16px;
+        }
+      }
+    }
+
+    &-description {
+        line-height: 1.71;
+        color: $dark;
+        max-height: 75px;
+        overflow: hidden;
+    }
+
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 28px;
+
+        .button:not(:last-of-type) {
+            margin-right: 12px;
+        }
+    }
+}

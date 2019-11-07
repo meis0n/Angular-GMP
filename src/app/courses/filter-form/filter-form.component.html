@@ -1,2 +1,4 @@
-<p>filter-form works!</p>
-<app-input></app-input>
+<div class="courses-filter-form">
+    <input class="input input-search" type="text" placeholder="Text to search" [(ngModel)]="searchValue">
+    <div class="button button--large button--primary" (click)="search($event)">Search</div>
+</div>

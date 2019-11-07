@@ -1,3 +1,32 @@
-<p>course-item works!</p>
-<app-button></app-button>
-<app-button></app-button>
+<div class="courses-item panel">
+    <div class="courses-item-info col-md-9">
+        <div class="courses-item-header">
+            <div class="courses-item-title mr-auto">
+                {{data.title}}
+            </div>
+            <div class="courses-item-additional-info">
+                <div class="courses-item-additional-info-item">
+                    <fa-icon class="icon" [icon]="faClock"></fa-icon>
+                    {{data.duration}}
+                </div>
+                <div class="courses-item-additional-info-item">
+                    <fa-icon class="icon" [icon]="faCalendarAlt"></fa-icon>
+                    {{data.creationDate}}
+                </div>
+            </div>
+        </div>
+        <div class="courses-item-description">
+            {{data.description}}
+        </div>
+    </div>
+    <div class="courses-item-actions col-md-3">
+        <div class="button button--small button--secondary" (click)="onEdit($event)">
+            <fa-icon class="icon" [icon]="faPencilAlt"></fa-icon>
+            Edit
+        </div>
+        <div class="button button--small button--secondary" (click)="onDelete($event)">
+            <fa-icon class="icon" [icon]="faTrash"></fa-icon>
+            Delete
+        </div>
+    </div>
+</div>
