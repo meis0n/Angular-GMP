@@ -68,6 +68,6 @@ implements OnInit,OnChanges, AfterContentInit, AfterContentChecked, AfterViewIni
   }
 
   onDelete() {
-    this.deleted.emit(this.data.id);
+    this.deleted.emit(this.data && this.data.id);
   }
 }
