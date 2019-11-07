@@ -1,4 +1,4 @@
-@import '../../../styles/index.scss';
+@import '../../../styles/variables';
 
 .courses-item {
     margin-bottom: 24px;
@@ -18,7 +18,7 @@
     &-additional-info {
       display: flex;
       align-items: center;
-      color: #b9bdce;
+      color: $cloudy-blue;
       font-size: $font-size-small;
       align-items: center;
 

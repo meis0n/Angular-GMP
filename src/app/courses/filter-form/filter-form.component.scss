@@ -1,3 +1,5 @@
+@import '../../../styles/variables'; 
+
 .courses-filter-form {
     display: flex;
     margin-bottom: 24px;
@@ -5,5 +7,5 @@
 
 .input-search {
   padding: 12px 12px 12px 42px;
-  background: url('/assets/icons/ic-search.svg') #fff no-repeat 12px 12px;
+  background: url('/assets/icons/ic-search.svg') $white no-repeat 12px 12px;
 }

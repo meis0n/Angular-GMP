@@ -25,7 +25,7 @@
         background-color: $sick-green;
 
        &:hover {
-          background-color: #86a532;
+          background-color: $sick-green-darker;
        }
     }
 
@@ -33,7 +33,7 @@
       background-color: $dark-sky-blue;
 
       &:hover {
-          background-color: #10616d;
+          background-color: $dark-sky-blue-darker;
       }
     }
 

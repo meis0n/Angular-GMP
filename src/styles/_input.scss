@@ -1,11 +1,13 @@
+@import './variables';
+
 .input {
   width: 360px;
   height: 48px;
   border-radius: 3px;
-  border: solid 1px #d9dbe3;
+  border: solid 1px $pale-gray-color;
 
   &::placeholder {
-      color: #c0c3ce;
+      color: $silver;
       letter-spacing: 0.22px;
   }
 }

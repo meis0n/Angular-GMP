@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { CoursesModule } from './courses/courses.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Routes, RouterModule } from '@angular/router';
 import { CoursesPageComponent } from './courses/courses-page/courses-page.component';
 
@@ -28,7 +27,6 @@ const appRoutes: Routes = [
     ),
     SharedModule,
     CoursesModule,
-    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
