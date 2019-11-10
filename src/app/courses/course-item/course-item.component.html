@@ -1,17 +1,18 @@
-<div class="courses-item panel">
+<div class="courses-item panel" [appHighlightStatus]="data?.creationDate" [ngClass]="{'top-rated': data?.topRated}">
     <div class="courses-item-info col-md-9">
         <div class="courses-item-header">
             <div data-test-id="CourseTitle" class="courses-item-title mr-auto">
-                {{data?.title}}
+                <span>{{data?.title | uppercase}}</span>
+                <fa-icon *ngIf=data?.topRated class="icon" [icon]="faStar"></fa-icon>
             </div>
             <div class="courses-item-additional-info">
                 <div class="courses-item-additional-info-item">
                     <fa-icon class="icon" [icon]="faClock"></fa-icon>
-                    {{data?.duration}}
+                    {{data?.durationMin | duration}}
                 </div>
                 <div class="courses-item-additional-info-item">
                     <fa-icon class="icon" [icon]="faCalendarAlt"></fa-icon>
-                    {{data?.creationDate}}
+                    {{data?.creationDate | date }}
                 </div>
             </div>
         </div>

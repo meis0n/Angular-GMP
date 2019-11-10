@@ -16,11 +16,12 @@ import { By } from '@angular/platform-browser';
 })
 class TestHostCourseItemComponent {
   public course: Course = {
-    creationDate: '12.10.10',
+    creationDate: new Date(),
     description: 'Lorem ipsum',
-    duration: '1h 12min',
+    durationMin: 120,
     id: '1',
     title: 'Test course',
+    topRated: false,
   };
 
   public onChange(changedCourse: Course) {

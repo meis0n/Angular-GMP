@@ -14,6 +14,8 @@ export class CoursesPageComponent implements OnInit {
 
   courses: Course[];
 
+  filter: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -30,5 +32,9 @@ export class CoursesPageComponent implements OnInit {
 
   onCourseDelete(courseId: string) {
     console.log(courseId);
+  }
+
+  onSearch(filterValue: string) {
+    this.filter = filterValue;
   }
 }
