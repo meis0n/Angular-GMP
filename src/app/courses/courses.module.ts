@@ -6,8 +6,6 @@ import { FilterFormComponent } from './filter-form/filter-form.component';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
 
-
-
 @NgModule({
   declarations: [CourseItemComponent, FilterFormComponent, CoursesPageComponent],
   imports: [
@@ -16,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule
   ],
   exports: [
-    CoursesPageComponent,
+    CoursesPageComponent
   ]
 })
 export class CoursesModule { }

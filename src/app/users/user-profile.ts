@@ -5,7 +5,7 @@ export class UserProfile implements User {
   firstName: string;
   lastName: string;
 
-  get fullName(): string {
+  get fullName (): string {
     return `${this.firstName} ${this.lastName}`;
   }
 }

@@ -10,7 +10,6 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterByStringPipe } from './pipes/filter-by-string.pipe';
 
-
 @NgModule({
   declarations: [
     LogoComponent,
@@ -24,7 +23,7 @@ import { FilterByStringPipe } from './pipes/filter-by-string.pipe';
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule,
+    FontAwesomeModule
   ],
   exports: [
     LogoComponent,

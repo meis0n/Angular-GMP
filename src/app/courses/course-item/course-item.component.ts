@@ -1,15 +1,9 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
-  EventEmitter,
-  OnChanges,
-  AfterContentInit,
-  AfterContentChecked,
-  AfterViewInit,
-  AfterViewChecked,
-  OnDestroy } from '@angular/core';
+  EventEmitter
+} from '@angular/core';
 import { faPencilAlt, faCalendarAlt, faClock, faTrash, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '../course';
 
@@ -29,13 +23,14 @@ export class CourseItemComponent {
   faClock: IconDefinition = faClock;
   faStar: IconDefinition = faStar;
 
-  constructor() { }
-
-  onEdit() {
+  onEdit (): void {
     this.changed.emit(this.data);
   }
 
-  onDelete() {
-    this.deleted.emit(this.data && this.data.id);
+  onDelete (): void {
+    const id = this.data && this.data.id;
+    if (id) {
+      this.deleted.emit(id);
+    }
   }
 }

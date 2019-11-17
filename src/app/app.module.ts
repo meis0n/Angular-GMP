@@ -26,7 +26,7 @@ const appRoutes: Routes = [
       { enableTracing: true }
     ),
     SharedModule,
-    CoursesModule,
+    CoursesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

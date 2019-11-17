@@ -9,10 +9,10 @@ describe('FilterFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule ],
-      declarations: [ FilterFormComponent ]
+      imports: [FormsModule],
+      declarations: [FilterFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

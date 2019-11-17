@@ -21,14 +21,14 @@ class TestHostCourseItemComponent {
     durationMin: 120,
     id: '1',
     title: 'Test course',
-    topRated: false,
+    topRated: false
   };
 
-  public onChange(changedCourse: Course) {
+  public onChange (changedCourse: Course): void {
     console.log(changedCourse);
   }
 
-  public onDelete(deletedCourseId: string) {
+  public onDelete (deletedCourseId: string): void {
     console.log(deletedCourseId);
   }
 }
@@ -41,10 +41,10 @@ describe('TestHostCourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent, TestHostCourseItemComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      declarations: [CourseItemComponent, TestHostCourseItemComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -59,7 +59,6 @@ describe('TestHostCourseItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 
   it('should call parent`s handler on "Edit" button ', () => {
     const editButton = fixture.debugElement.query(By.css('[data-test-id="EditCourse"'));

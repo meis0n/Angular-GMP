@@ -6,7 +6,7 @@ export const courses: Course[] = [{
   durationMin: 88,
   id: '1',
   title: 'Video Course 1',
-  topRated: false,
+  topRated: false
 },
 {
   creationDate: new Date(),
@@ -14,7 +14,7 @@ export const courses: Course[] = [{
   durationMin: 15,
   id: '2',
   title: 'Video Course 2',
-  topRated: true,
+  topRated: true
 },
 {
   creationDate: new Date(2020, 2, 3),
@@ -22,5 +22,5 @@ export const courses: Course[] = [{
   durationMin: 240,
   id: '3',
   title: 'Video Course 3',
-  topRated: false,
+  topRated: false
 }];
