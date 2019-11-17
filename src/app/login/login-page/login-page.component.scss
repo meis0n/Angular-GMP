@@ -1,0 +1,15 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+
+    .reset-pass-btn {
+      padding-left: 0;
+    }
+  }
+}

@@ -1,7 +1,8 @@
 <div class="app-header">
     <div class="app-header-container container">
         <app-logo class="mr-auto"></app-logo>
-        <div class="button button--transparent"><span class="icon icon-user"></span>{{login}}</div>
-        <div class="button button--transparent"><span class="icon icon-exit"></span>Log off</div>
+        <div *ngIf="isAuthenticated" class="button button--transparent" (click)="onUserInfo($event)"><span class="icon icon-user"></span>{{login}}</div>
+        <div *ngIf="isAuthenticated" class="button button--transparent" (click)="onLogoff($event)"><span class="icon icon-exit"></span>Log off</div>
     </div>
 </div>
+<app-breadcrumbs *ngIf="isAuthenticated"></app-breadcrumbs>

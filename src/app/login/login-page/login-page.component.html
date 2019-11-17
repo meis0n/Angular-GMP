@@ -1,0 +1,18 @@
+<div class="courses-page container login-page">
+  <div class="panel login-form">
+    <div>
+      <div>
+        <label class="input-label">E-mail</label>
+        <input class="input" [(ngModel)]="email"/>
+      </div>
+      <div>
+        <label class="input-label">Password</label>
+        <input class="input" [(ngModel)]="login"/>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="button button--link reset-pass-btn">Forgot password?</div>
+      <div class="button button--primary" (click)="onLogin($event)">Login</div>
+    </div>
+  </div>
+</div>
