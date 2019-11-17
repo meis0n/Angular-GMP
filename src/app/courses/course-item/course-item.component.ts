@@ -24,7 +24,9 @@ export class CourseItemComponent {
   faStar: IconDefinition = faStar;
 
   onEdit (): void {
-    this.changed.emit(this.data);
+    if (this.data) {
+      this.changed.emit(this.data);
+    }
   }
 
   onDelete (): void {
