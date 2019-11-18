@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthorizationService } from 'src/app/shared/services/authorization.service';
 
 @Component({
@@ -6,16 +6,13 @@ import { AuthorizationService } from 'src/app/shared/services/authorization.serv
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
   login: string;
   email: string;
 
   constructor(private authorizationService: AuthorizationService) { }
 
-  ngOnInit() {
-  }
-
-  async onLogin() {
+  async onLogin(): Promise<void> {
     await this.authorizationService.login({
       id: '123',
       firstName: '123',
@@ -23,7 +20,7 @@ export class LoginPageComponent implements OnInit {
       lastName: '123',
       email: this.email,
     });
-    console.log('Success login', { login: this.login, email: this.email})
+    console.log('Success login', { login: this.login, email: this.email});
   }
 
 }

@@ -23,6 +23,4 @@ export class CourseService {
   }
 
   private courses: Course[] = courses;
-
-  constructor() { }
 }

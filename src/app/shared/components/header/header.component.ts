@@ -21,10 +21,10 @@ export class HeaderComponent {
   }
 
   onLogoff(): void {
-    console.log('logoff')
+    console.log('logoff');
   }
 
   onUserInfo(): void {
-    console.log('showUserInfo')
+    console.log('showUserInfo');
   }
 }
