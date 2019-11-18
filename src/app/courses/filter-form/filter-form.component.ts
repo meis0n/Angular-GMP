@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html',
   styleUrls: ['./filter-form.component.scss']
 })
-export class FilterFormComponent implements OnInit {
+export class FilterFormComponent {
   public searchValue = '';
+  @Output() search = new EventEmitter<string>();
 
-  constructor() { }
-
-  ngOnInit() {
+  onSearch (): void {
+    this.search.emit(this.searchValue);
   }
-
-  search () {
-    console.log(this.searchValue);
-  }
-
 }

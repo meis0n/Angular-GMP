@@ -4,6 +4,18 @@
     margin-bottom: 24px;
     display: flex;
 
+    &.top-rated {
+      background-color: $light-sick-green;
+    }
+
+    &.active {
+      border: 2px solid $sick-green;
+    }
+
+    &.planned {
+      border: 2px solid $dark-sky-blue;
+    }
+
     &-header {
       display: flex;
     }
@@ -13,6 +25,12 @@
         font-weight: 600;
         color: $dark;
         margin-bottom: 11px;
+        display: flex;
+        align-items: center;
+
+        .icon {
+          margin-left: 10px;
+        }
     }
 
     &-additional-info {

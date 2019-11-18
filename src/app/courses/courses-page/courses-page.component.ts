@@ -14,21 +14,25 @@ export class CoursesPageComponent implements OnInit {
 
   courses: Course[];
 
-  constructor() { }
+  filter: string;
 
-  ngOnInit() {
+  ngOnInit (): void {
     this.courses = courses;
   }
 
-  addCourse() {
+  addCourse (): void {
     console.log('add new course');
   }
 
-  onCourseChange(course: Course) {
+  onCourseChange (course: Course): void {
     console.log(course);
   }
 
-  onCourseDelete(courseId: string) {
+  onCourseDelete (courseId: string): void {
     console.log(courseId);
+  }
+
+  onSearch (filterValue: string): void {
+    this.filter = filterValue;
   }
 }
