@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '../course';
 
-import { courses } from './mock';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -16,8 +16,10 @@ export class CoursesPageComponent implements OnInit {
 
   filter: string;
 
+  constructor (private courseService: CourseService) {}
+
   ngOnInit (): void {
-    this.courses = courses;
+    this.courses = this.courseService.getCourses();
   }
 
   addCourse (): void {
@@ -28,11 +30,20 @@ export class CoursesPageComponent implements OnInit {
     console.log(course);
   }
 
-  onCourseDelete (courseId: string): void {
-    console.log(courseId);
+  async onCourseDelete (courseId: Course['id']): Promise<void> {
+    const course = await this.courseService.getCourseById(courseId);
+    const isUserAgree = confirm(`Удалить курс ${course.title}`);
+    if (isUserAgree) {
+      await this.courseService.removeCourse(courseId);
+      this.refreshCourses();
+    }
   }
 
   onSearch (filterValue: string): void {
     this.filter = filterValue;
+  }
+
+  private refreshCourses (): void {
+    this.courses = this.courseService.getCourses();
   }
 }

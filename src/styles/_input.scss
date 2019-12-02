@@ -5,9 +5,16 @@
   height: 48px;
   border-radius: 3px;
   border: solid 1px $pale-gray-color;
+  padding: 8px;
 
   &::placeholder {
       color: $silver;
       letter-spacing: 0.22px;
+  }
+
+  &-label {
+    padding: 8px 0;
+    display: block;
+    font-weight: 600;
   }
 }

@@ -1,4 +1,4 @@
-import { Course } from '../course';
+import { Course } from './course';
 
 export const courses: Course[] = [{
   creationDate: new Date(2030, 1, 10),
