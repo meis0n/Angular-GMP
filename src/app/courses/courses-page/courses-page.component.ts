@@ -3,6 +3,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '../course';
 
 import { CourseService } from '../course.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-page',
@@ -16,18 +17,21 @@ export class CoursesPageComponent implements OnInit {
 
   filter: string;
 
-  constructor (private courseService: CourseService) {}
+  constructor (
+    private courseService: CourseService,
+    private router: Router
+  ) {}
 
   ngOnInit (): void {
     this.courses = this.courseService.getCourses();
   }
 
   addCourse (): void {
-    console.log('add new course');
+    this.router.navigateByUrl('course/new');
   }
 
   onCourseChange (course: Course): void {
-    console.log(course);
+    this.router.navigateByUrl(`course/${course.id}`);
   }
 
   async onCourseDelete (courseId: Course['id']): Promise<void> {

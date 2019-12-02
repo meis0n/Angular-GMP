@@ -12,6 +12,7 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterByStringPipe } from './pipes/filter-by-string.pipe';
 import { FormsModule } from '@angular/forms';
 import { DurationInputComponent } from './components/duration-input/duration-input.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { DurationInputComponent } from './components/duration-input/duration-inp
     OrderByPipe,
     FilterByStringPipe,
     DurationInputComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { DurationInputComponent } from './components/duration-input/duration-inp
     HighlightStatusDirective,
     DurationPipe,
     OrderByPipe,
-    FilterByStringPipe
+    FilterByStringPipe,
+    NotFoundComponent,
   ]
 })
 export class SharedModule { }

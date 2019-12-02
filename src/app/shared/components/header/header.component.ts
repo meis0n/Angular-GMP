@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,10 @@ export class HeaderComponent {
   public login: string;
   public isAuthenticated: boolean;
 
-  constructor (private authorizationService: AuthorizationService) {}
+  constructor (
+    private authorizationService: AuthorizationService,
+    private router: Router,
+    ) {}
 
   async ngOnInit(): Promise<void> {
     this.isAuthenticated = await this.authorizationService.isAuthenticated();
@@ -20,8 +24,10 @@ export class HeaderComponent {
     }
   }
 
-  onLogoff(): void {
-    console.log('logoff');
+  async onLogoff(): Promise<void> {
+    await this.authorizationService.logout();
+    this.isAuthenticated = await this.authorizationService.isAuthenticated();
+    this.router.navigateByUrl('login');
   }
 
   onUserInfo(): void {

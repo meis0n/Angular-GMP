@@ -6,10 +6,18 @@ import { Course } from './course';
   providedIn: 'root'
 })
 export class CourseService {
+
+  private generateId() {
+    return (Math.random() * 10000).toFixed(0).toString();
+  }
+
   getCourses(): Course[] {
     return this.courses;
   }
   createCourse(course: Course): void {
+    course.creationDate = new Date();
+    course.id = this.generateId();
+
     this.courses.push(course);
   }
   getCourseById(id: Course['id']): Course {

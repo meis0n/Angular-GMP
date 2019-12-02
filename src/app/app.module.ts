@@ -11,6 +11,7 @@ import { CoursesPageComponent } from './courses/courses-page/courses-page.compon
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { LoginModule } from './login/login.module';
 import { CourseDataPageComponent } from './courses/course-data-page/course-data-page.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -18,17 +19,39 @@ const appRoutes: Routes = [
     component: LoginPageComponent
   },
   {
+    path: 'course/new',
+    component: CourseDataPageComponent,
+    data: {
+      //Вопрос: в идеале я зотел бы видеть это чем-то вроде константы
+      // COURSE_DETAIL_MODES.EDIT|NEW, но как правильно их заимпортить в коммон модуль из своего модуля, отвечающего за страницы курсов?
+      mode: 'new',
+    }
+  },
+  {
     path: 'course/:id',
     component: CourseDataPageComponent,
+    data: {
+      mode: 'edit',
+    }
   },
   {
     path: 'courses',
     component: CoursesPageComponent,
   },
   {
-    path: '**',
-    component: CoursesPageComponent,
+    path: '',
+    redirectTo: 'courses',
+    pathMatch : 'full'
   },
+  {
+    path: '404',
+    component: NotFoundComponent,
+    pathMatch : 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '404'
+  }
 ];
 
 @NgModule({
