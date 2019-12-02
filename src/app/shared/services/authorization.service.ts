@@ -14,7 +14,7 @@ export class AuthorizationService {
     this.localStorage.reset(USER_LOGIN_DATA_KEY);
   }
   isAuthenticated(): boolean {
-    const user = this.localStorage.get(USER_LOGIN_DATA_KEY);
+    const user = this.getCurrentUserInfo();
     return Boolean(user);
   }
   getCurrentUserInfo(): User | null {
