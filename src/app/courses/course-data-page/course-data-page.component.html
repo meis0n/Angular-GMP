@@ -1,23 +1,23 @@
 <div class="container">
   <div class="panel ">
-    <div>
+    <ng-container *ngIf="data">
       <div>
         <label class="input-label">Title:</label>
-        <input class="input" [(ngModel)]="title"/>
+        <input class="input" [(ngModel)]="data.title"/>
       </div>
       <div>
         <label class="input-label">Description:</label>
-        <textarea class="input" [(ngModel)]="description"> </textarea>
+        <textarea class="input" [(ngModel)]="data.description"> </textarea>
       </div>
       <div>
         <label class="input-label">Date:</label>
-        <app-datepicker [(value)]="date"></app-datepicker>
+        <app-datepicker [(value)]="data.creationDate"></app-datepicker>
       </div>
       <div>
         <label class="input-label">Duration:</label>
-        <app-duration-input type="number" [(value)]="duration"></app-duration-input>
+        <app-duration-input type="number" [(value)]="data.durationMin"></app-duration-input>
       </div>
-    </div>
+    </ng-container>
     <div class="footer">
       <div class="button button--link">Cancel</div>
       <div class="button button--primary">Save</div>
