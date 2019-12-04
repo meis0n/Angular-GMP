@@ -10,11 +10,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { CoursesPageComponent } from './courses/courses-page/courses-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
 import { LoginModule } from './login/login.module';
+import { CourseDataPageComponent } from './courses/course-data-page/course-data-page.component';
 
 const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'course',
+    component: CourseDataPageComponent,
   },
   {
     path: '**',

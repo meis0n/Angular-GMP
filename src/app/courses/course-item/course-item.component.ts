@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { faPencilAlt, faCalendarAlt, faClock, faTrash, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '../course';
@@ -10,7 +11,8 @@ import { Course } from '../course';
 @Component({
   selector: 'app-course-item',
   templateUrl: './course-item.component.html',
-  styleUrls: ['./course-item.component.scss']
+  styleUrls: ['./course-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseItemComponent {
   @Input() data: Course;
