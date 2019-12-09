@@ -13,6 +13,7 @@ import { FilterByStringPipe } from './pipes/filter-by-string.pipe';
 import { FormsModule } from '@angular/forms';
 import { DurationInputComponent } from './components/duration-input/duration-input.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   imports: [
     CommonModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     LogoComponent,

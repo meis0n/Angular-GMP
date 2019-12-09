@@ -13,7 +13,7 @@ export class AuthorizationService {
   logout(): void {
     this.localStorage.reset(USER_LOGIN_DATA_KEY);
   }
-  isAuthenticated(): boolean {
+  async isAuthenticated(): Promise<boolean> {
     const user = this.getCurrentUserInfo();
     return Boolean(user);
   }

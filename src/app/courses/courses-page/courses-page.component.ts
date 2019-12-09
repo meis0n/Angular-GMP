@@ -27,11 +27,11 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addCourse (): void {
-    this.router.navigateByUrl('course/new');
+    this.router.navigateByUrl('courses/new');
   }
 
   onCourseChange (course: Course): void {
-    this.router.navigateByUrl(`course/${course.id}`);
+    this.router.navigateByUrl(`courses/${course.id}`);
   }
 
   async onCourseDelete (courseId: Course['id']): Promise<void> {
