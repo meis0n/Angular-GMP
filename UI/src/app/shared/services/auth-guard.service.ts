@@ -9,8 +9,8 @@ export class AuthGuardService {
 
   constructor(private authService: AuthorizationService, private router: Router) { }
 
-  async canActivate(): Promise<boolean> {
-    const isAuthenticated = await this.authService.isAuthenticated();
+  canActivate(): boolean {
+    const isAuthenticated = this.authService.isAuthenticated$.getValue();
     if(!isAuthenticated) {
       this.router.navigateByUrl('login');
     }

@@ -17,23 +17,18 @@ export class LoginPageComponent {
     ) { }
 
   async ngOnInit(): Promise<void> {
-    const isLoggedIn = await this.authorizationService.isAuthenticated();
-
-    if (isLoggedIn) {
-      this.redirectToCourses();
-    }
+    this.authorizationService.isAuthenticated$.subscribe(isAuthentificated => {
+      if (isAuthentificated) {
+        this.redirectToCourses();
+      }
+    });
   }
 
   async onLogin(): Promise<void> {
-    await this.authorizationService.login({
-      id: '123',
-      firstName: '123',
-      login: this.login,
-      lastName: '123',
-      email: this.email,
-    });
-
-    this.redirectToCourses();
+    await this.authorizationService.login(
+      this.login,
+      this.email,
+    );
   }
 
   private redirectToCourses () {

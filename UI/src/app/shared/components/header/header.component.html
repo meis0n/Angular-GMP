@@ -1,10 +1,10 @@
 <div class="app-header">
     <div class="app-header-container container">
         <app-logo class="mr-auto"></app-logo>
-        <ng-container *ngIf="isAuthenticated">
-            <div class="button button--transparent" (click)="onUserInfo()"><span class="icon icon-user"></span>{{login}}</div>
+        <ng-container *ngIf="isAuthenticated$ | async">
+            <div class="button button--transparent" (click)="onUserInfo()"><span class="icon icon-user"></span>{{ (userInfo$ | async)?.login }}</div>
             <div class="button button--transparent" (click)="onLogoff()"><span class="icon icon-exit"></span>Log off</div>
         </ng-container>
     </div>
 </div>
-<app-breadcrumbs *ngIf="isAuthenticated"></app-breadcrumbs>
+<app-breadcrumbs *ngIf="isAuthenticated$ | async"></app-breadcrumbs>

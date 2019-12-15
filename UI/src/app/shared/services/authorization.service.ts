@@ -1,24 +1,51 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { User } from '../entities/user';
-import { USER_LOGIN_DATA_KEY } from '../constants';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
-  login(user: User): void {
-    this.localStorage.set(USER_LOGIN_DATA_KEY, user);
+  private BASE_URL = 'auth';
+  public isAuthenticated$ = new BehaviorSubject<boolean>(Boolean(this.getToken()));
+
+  async login(login: string, password: string): Promise<void> {
+    this.httpClient.post(`${this.BASE_URL}/login`, {
+      login,
+      password,
+    }).subscribe(({ token }: { token: string}) => {
+      this.setToken(token);
+      this.isAuthenticated$.next(true);
+    });
   }
   logout(): void {
-    this.localStorage.reset(USER_LOGIN_DATA_KEY);
+    this.localStorage.reset('AUTH');
+    this.isAuthenticated$.next(false);
   }
-  async isAuthenticated(): Promise<boolean> {
-    const user = this.getCurrentUserInfo();
-    return Boolean(user);
+
+  getCurrentUserInfo(): Observable<User> {
+    return this.httpClient.post(`${this.BASE_URL}/userinfo`, {}).pipe(
+      map((data: Object): User => ({
+          id: data['id'],
+          login: data['login'],
+          firstName: data['name.first'],
+          lastName: data['name.last'],
+          email: data['login'],
+        })
+      )
+    );
   }
-  getCurrentUserInfo(): User | null {
-    return this.localStorage.get(USER_LOGIN_DATA_KEY);
+  private setToken(token: string): void {
+    return this.localStorage.set('AUTH', token);
   }
-  constructor(private localStorage: LocalStorageService) { }
+  getToken(): string {
+    return this.localStorage.get('AUTH');
+  }
+  constructor(private localStorage: LocalStorageService, private httpClient: HttpClient) {
+    this.isAuthenticated$.next(Boolean(this.getToken()));
+  }
 }
