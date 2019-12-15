@@ -48,8 +48,9 @@ export class CourseDataPageComponent {
   }
 
   async onSave (): Promise<void> {
+    // TODO: Изменить при выполнении task9
     if (this.isEditMode) {
-
+      return;
     }
     else {
       await this.courseServise.createCourse(this.data);

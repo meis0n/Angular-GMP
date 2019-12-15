@@ -25,7 +25,7 @@ export class BreadcrumbsComponent {
     });
   }
 
-  buildBreadCrumb(route: ActivatedRoute = this.activatedRoute.root, url: string = '',
+  buildBreadCrumb(route: ActivatedRoute = this.activatedRoute.root, url = '',
                 breadcrumbs: Array<Breadcrumb> = []): Array<Breadcrumb> {
     const label = route.routeConfig && route.routeConfig.data && route.routeConfig.data[ 'breadcrumb' ];
 

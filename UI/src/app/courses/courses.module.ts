@@ -6,20 +6,20 @@ import { FilterFormComponent } from './filter-form/filter-form.component';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { CourseDataPageComponent } from './course-data-page/course-data-page.component';
 import { SharedModule } from '../shared/shared.module';
-import { RouterOutlet } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
+import { CouresRoutingModule } from './courses-routing.module';
 
 @NgModule({
-  declarations: [CourseItemComponent, FilterFormComponent, CoursesPageComponent, CourseDataPageComponent],
+  declarations: [
+    CourseItemComponent,
+    FilterFormComponent,
+    CoursesPageComponent,
+    CourseDataPageComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
-    AppRoutingModule,
+    CouresRoutingModule,
   ],
-  exports: [
-    CoursesPageComponent,
-    CourseDataPageComponent,
-  ]
 })
 export class CoursesModule { }
