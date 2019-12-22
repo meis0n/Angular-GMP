@@ -11,7 +11,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  private userInfo$: Observable<User>;
+  public userInfo$: Observable<User>;
   public isAuthenticated$: BehaviorSubject<boolean>;
 
   constructor (

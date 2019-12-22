@@ -7,6 +7,12 @@
     align-items: center;
     justify-content: center;
 
+    &[size="4x"] {
+      height: 56px;
+      width: 56px;
+      animation: spinner-border .9s linear infinite;
+    }
+
     &-search {
         background-image: url('/assets/icons/ic-search.svg');
     }

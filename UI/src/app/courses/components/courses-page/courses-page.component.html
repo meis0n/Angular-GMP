@@ -1,11 +1,13 @@
 <div class="courses-page container">
-    <app-filter-form (search)="onSearch($event)"></app-filter-form>
+    <div class="courses-filter-form">
+      <input class="input input-search" type="text" placeholder="Text to search" [(ngModel)]="filterInput" (keyup)="onSearch($event)">
+    </div>
     <div class="courses-page-actions">
       <div data-test-id="AddCourse" class="button button--secondary" (click)="addCourse()"><fa-icon class="icon" [icon] ="faPlus"></fa-icon>Add course</div>
     </div>
-    <ng-container *ngIf="(courses$ | async) as courses">
+    <ng-container *ngIf="(coursesStoreService.courses$ | async) as courses">
       <ul *ngIf="courses.length; else noCourses">
-        <li *ngFor="let course of courses$ | async ">
+        <li *ngFor="let course of courses">
           <app-course-item [data]="course" (changed)="onCourseChange($event)" (deleted)="onCourseDelete($event)"></ app-course-item>
         </li>
         <div class="panel courses-page-more-block" (click)="onLoadMore()">

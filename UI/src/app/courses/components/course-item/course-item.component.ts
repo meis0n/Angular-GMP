@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { faPencilAlt, faCalendarAlt, faClock, faTrash, faStar, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { Course } from '../course';
+import { Course } from '../../entities/course';
 
 @Component({
   selector: 'app-course-item',

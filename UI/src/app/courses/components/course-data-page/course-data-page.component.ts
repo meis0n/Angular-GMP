@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../course';
-import { CourseService } from '../services/course.service';
-import { CourseItem } from '../course-item';
+import { Course } from '../../entities/course';
+import { CourseService } from '../../services/course.service';
+import { CourseItem } from '../../entities/course-item';
 
 @Component({
   selector: 'app-course-data-page',
@@ -58,6 +58,5 @@ export class CourseDataPageComponent {
         this.router.navigateByUrl('courses');
       });
     }
-
   }
 }
