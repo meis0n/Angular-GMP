@@ -1,0 +1,7 @@
+<div class="breadcrubs">
+    <div class="container">
+      <ng-container *ngFor="let breadcrumb of data">
+        <a [routerLink]="breadcrumb.url" class="breadcrub-item">{{breadcrumb.title}}</a>
+      </ng-container>
+    </div>
+</div>

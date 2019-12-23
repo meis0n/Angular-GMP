@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="panel ">
+    <div>
+      <label class="input-label">Title:</label>
+      <input class="input" [(ngModel)]="data.title"/>
+    </div>
+    <div>
+      <label class="input-label">Description:</label>
+      <textarea class="input" [(ngModel)]="data.description"> </textarea>
+    </div>
+    <div>
+      <label class="input-label">Date:</label>
+      <app-datepicker [(value)]="data.creationDate"></app-datepicker>
+    </div>
+    <div>
+      <label class="input-label">Duration:</label>
+      <app-duration-input type="number" [(value)]="data.durationMin"></app-duration-input>
+    </div>
+  <div class="footer">
+    <div class="button button--link" (click)="onCancel()">Cancel</div>
+    <div class="button button--primary" (click)="onSave()">Save</div>
+  </div>
+</div>
