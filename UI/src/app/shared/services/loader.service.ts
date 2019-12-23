@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { uuid } from 'uuid';
-import { Observable, BehaviorSubject } from 'rxjs';
+import uuidv1 from 'uuid/v1';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface LoaderSession {
-  id: string,
-};
+  id: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,12 @@ export interface LoaderSession {
 export class LoaderService {
   _queue = new BehaviorSubject<string[]>([]);
 
-  isLoaded = this._queue.pipe(
+  isLoaded$ = this._queue.pipe(
     map(q => Boolean(q.length))
   );
 
-  constructor() { }
-
   add (): LoaderSession {
-    const id = uuid();
+    const id = uuidv1();
     this._queue.next([...this._queue.getValue(), id]);
     return {
       id

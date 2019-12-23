@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { Course } from '../entities/course';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
 import * as moment from 'moment';
 import { CoursesSearchParams } from '../entities/courses-search-params';
-import { LoaderService } from 'src/app/shared/services/loader.service';
+
+import { LoaderService } from '../../shared/services/loader.service';
 
 const mapper = {
-  fromBE: function (c: Object) {
+  fromBE: function (c: Record<string, any>): Course {
     return {
       creationDate: c['date'],
       description: c['description'],
@@ -20,7 +21,7 @@ const mapper = {
       topRated: c['isTopRated'],
     };
   },
-  toBE: function (c: Course): Object {
+  toBE: function (c: Course): Record<string, any> {
     return {
       date: moment(c.creationDate).toISOString(),
       description: c.description,
@@ -30,7 +31,7 @@ const mapper = {
       isTopRated: c.topRated,
     };
   }
-}
+};
 
 @Injectable({
   providedIn: 'root'
@@ -53,15 +54,17 @@ export class CourseService {
         }
       }
     }).pipe(
+      // to show loader component behavior
+      delay(2000),
       map(
-        (courses: Object[]) => {
+        (courses: Record<string, any>[]) => {
           return courses.map(mapper.fromBE);
         },
       )
     );
   }
 
-  createCourse(course: Course): Observable<Object> {
+  createCourse(course: Course): Observable<Record<string, any>> {
     return this.httpClient.post(`${this.BASE_URL}`, mapper.toBE(course));
   }
 
@@ -71,11 +74,11 @@ export class CourseService {
     );
   }
 
-  updateCourse(course: Course): Observable<Object> {
+  updateCourse(course: Course): Observable<Record<string, any>> {
     return this.httpClient.put(`${this.BASE_URL}/${course.id}`, mapper.toBE(course));
   }
 
-  removeCourse(id: Course['id']): Observable<Object> {
+  removeCourse(id: Course['id']): Observable<Record<string, any>> {
     return this.httpClient.delete(`${this.BASE_URL}/${id}`);
   }
 }

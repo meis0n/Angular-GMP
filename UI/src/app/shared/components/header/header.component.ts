@@ -3,7 +3,7 @@ import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',

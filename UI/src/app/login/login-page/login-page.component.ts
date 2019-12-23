@@ -31,7 +31,7 @@ export class LoginPageComponent {
     );
   }
 
-  private redirectToCourses () {
+  private redirectToCourses (): void {
     this.router.navigateByUrl('courses');
   }
 }

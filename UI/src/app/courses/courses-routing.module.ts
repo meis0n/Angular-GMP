@@ -4,7 +4,7 @@ import { RouterModule, Routes, ActivatedRoute } from "@angular/router";
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { CourseDataPageComponent } from './components/course-data-page/course-data-page.component';
 
-export function generateCourseBreadcrumb (route: ActivatedRoute) {
+export function generateCourseBreadcrumb (route: ActivatedRoute): string {
   return `Video course ${route.snapshot.params.id}`;
 }
 

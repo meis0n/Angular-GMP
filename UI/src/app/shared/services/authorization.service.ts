@@ -30,7 +30,7 @@ export class AuthorizationService {
 
   getCurrentUserInfo(): Observable<User> {
     return this.httpClient.post(`${this.BASE_URL}/userinfo`, {}).pipe(
-      map((data: Object): User => ({
+      map((data: Record<string, any>): User => ({
           id: data['id'],
           login: data['login'],
           firstName: data['name.first'],
