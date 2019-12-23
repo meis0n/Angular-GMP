@@ -49,9 +49,10 @@ export class CourseDataPageComponent {
   }
 
   async onSave (): Promise<void> {
-    // TODO: Изменить при выполнении task9
     if (this.isEditMode) {
-      return;
+      this.courseServise.updateCourse(this.data).subscribe(() => {
+        this.router.navigateByUrl('courses');
+      });
     }
     else {
       this.courseServise.createCourse(this.data).subscribe(() => {
