@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../course';
-import { CourseService } from '../course.service';
+import { CourseService } from '../services/course.service';
 import { CourseItem } from '../course-item';
 
 @Component({

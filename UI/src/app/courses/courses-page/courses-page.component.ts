@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '../course';
 
-import { CourseService } from '../course.service';
+import { CourseService } from '../services/course.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';

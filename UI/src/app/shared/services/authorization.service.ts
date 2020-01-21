@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthorizationService {
   private BASE_URL = 'auth';
+  private storageKey = 'AUTH';
   public isAuthenticated$ = new BehaviorSubject<boolean>(Boolean(this.getToken()));
 
   async login(login: string, password: string): Promise<void> {
@@ -23,7 +24,7 @@ export class AuthorizationService {
     });
   }
   logout(): void {
-    this.localStorage.reset('AUTH');
+    this.localStorage.reset(this.storageKey);
     this.isAuthenticated$.next(false);
   }
 
@@ -40,10 +41,10 @@ export class AuthorizationService {
     );
   }
   private setToken(token: string): void {
-    return this.localStorage.set('AUTH', token);
+    return this.localStorage.set(this.storageKey, token);
   }
   getToken(): string {
-    return this.localStorage.get('AUTH');
+    return this.localStorage.get(this.storageKey);
   }
   constructor(private localStorage: LocalStorageService, private httpClient: HttpClient) {
     this.isAuthenticated$.next(Boolean(this.getToken()));

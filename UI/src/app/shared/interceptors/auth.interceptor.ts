@@ -8,6 +8,7 @@ import { AuthorizationService } from '../services/authorization.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthorizationService) {}
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
       body: {
@@ -15,8 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
         token: this.authService.getToken()
       },
     });
-
-    console.log(req);
 
     return next.handle(req);
   }

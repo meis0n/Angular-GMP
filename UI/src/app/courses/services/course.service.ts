@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { courses } from './mock';
-import { Course } from './course';
+import { courses } from '../mock';
+import { Course } from '../course';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
 
 import * as moment from 'moment';
+import { GetCoursesRequest } from './contracts/getCoursesRequest';
 
 const mapper = {
   fromBE: function (c: Object) {
@@ -25,7 +25,7 @@ const mapper = {
       date: moment(c.creationDate).toISOString(),
       description: c.description,
       length: c.durationMin,
-      id: (Math.random() * 10000).toFixed(0).toString(),
+      id: c.id || (Math.random() * 10000).toFixed(0).toString(),
       name: c.title,
       isTopRated: c.topRated,
     };
@@ -41,17 +41,9 @@ export class CourseService {
   /**
    *
    */
-  constructor(private httpClient: HttpClient) {
-    this.getCourses();
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  getCourses(options?: {
-    start?: string,
-    count?: string,
-    sort?: string,
-    filter?: string,
-    textFragment?: string,
-  }): Observable<Course[]> {
+  getCourses(options?: GetCoursesRequest): Observable<Course[]> {
     return this.httpClient.get(`${this.BASE_URL}`, {
       params: {
         ...{
@@ -79,8 +71,8 @@ export class CourseService {
     );
   }
 
-  updateCourse(course: Course): void {
-    this.courses = this.courses.map(c => c.id === course.id ? course : c);
+  updateCourse(course: Course): Observable<Object> {
+    return this.httpClient.patch(`${this.BASE_URL}/${course.id}`, mapper.toBE(course));
   }
 
   removeCourse(id: Course['id']): Observable<Object> {

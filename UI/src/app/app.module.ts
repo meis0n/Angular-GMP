@@ -67,10 +67,7 @@ const appRoutes: Routes = [
     SharedModule,
     LoginModule,
   ],
-  providers: [{
-    provide: "BASE_API_URL",
-    useValue: 'http://localhost:3004'
-  },
+  providers: [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
