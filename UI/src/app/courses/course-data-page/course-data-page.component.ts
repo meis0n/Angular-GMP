@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../course';
-import { CourseService } from '../course.service';
+import { CourseService } from '../services/course.service';
 import { CourseItem } from '../course-item';
 
 @Component({
@@ -29,13 +29,14 @@ export class CourseDataPageComponent {
 
     if (this.isEditMode) {
       const id = this.route.snapshot.paramMap.get('id');
-      const data = await this.courseServise.getCourseById(id);
-      if(!data) {
-        this.router.navigateByUrl('404');
-      }
-      else {
-        this.data = data;
-      }
+      const data = await this.courseServise.getCourseById(id).subscribe(c => {
+        if(!data) {
+          this.router.navigateByUrl('404');
+        }
+        else {
+          this.data = c;
+        }
+      });
     }
   }
 
@@ -53,9 +54,10 @@ export class CourseDataPageComponent {
       return;
     }
     else {
-      await this.courseServise.createCourse(this.data);
+      this.courseServise.createCourse(this.data).subscribe(() => {
+        this.router.navigateByUrl('courses');
+      });
     }
 
-    this.router.navigateByUrl('courses');
   }
 }

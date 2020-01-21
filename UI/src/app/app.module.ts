@@ -10,6 +10,9 @@ import { LoginPageComponent } from './login/login-page/login-page.component';
 import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { BaseUrlInterceptor } from './shared/interceptors/base-url.interceptor';
 
 const appRoutes: Routes = [
   {
@@ -55,6 +58,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
@@ -63,7 +67,17 @@ const appRoutes: Routes = [
     SharedModule,
     LoginModule,
   ],
-  providers: [],
+  providers: [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: BaseUrlInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

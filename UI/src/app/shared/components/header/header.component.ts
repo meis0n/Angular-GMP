@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
+import { User } from '../../entities/user';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public login: string;
-  public isAuthenticated: boolean;
+  private userInfo$: Observable<User>;
+  public isAuthenticated$: BehaviorSubject<boolean>;
 
   constructor (
     private authorizationService: AuthorizationService,
@@ -17,16 +20,12 @@ export class HeaderComponent {
     ) {}
 
   async ngOnInit(): Promise<void> {
-    this.isAuthenticated = await this.authorizationService.isAuthenticated();
-    if(this.isAuthenticated) {
-      const user = await this.authorizationService.getCurrentUserInfo();
-      this.login = user.login;
-    }
+    this.isAuthenticated$ = this.authorizationService.isAuthenticated$;
+    this.userInfo$ = this.authorizationService.getCurrentUserInfo();
   }
 
   async onLogoff(): Promise<void> {
     await this.authorizationService.logout();
-    this.isAuthenticated = await this.authorizationService.isAuthenticated();
     this.router.navigateByUrl('login');
   }
 
