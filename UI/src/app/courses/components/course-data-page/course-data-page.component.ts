@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Course } from '../course';
-import { CourseService } from '../services/course.service';
-import { CourseItem } from '../course-item';
+import { Course } from '../../entities/course';
+import { CourseService } from '../../services/course.service';
+import { CourseItem } from '../../entities/course-item';
 
 @Component({
   selector: 'app-course-data-page',
@@ -49,15 +49,15 @@ export class CourseDataPageComponent {
   }
 
   async onSave (): Promise<void> {
-    // TODO: Изменить при выполнении task9
     if (this.isEditMode) {
-      return;
+      this.courseServise.updateCourse(this.data).subscribe(() => {
+        this.router.navigateByUrl('courses');
+      });
     }
     else {
       this.courseServise.createCourse(this.data).subscribe(() => {
         this.router.navigateByUrl('courses');
       });
     }
-
   }
 }

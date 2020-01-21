@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import { courses } from '../mock';
-import { Course } from '../course';
+import { Course } from '../entities/course';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
 import * as moment from 'moment';
-import { GetCoursesRequest } from './contracts/getCoursesRequest';
+import { CoursesSearchParams } from '../entities/courses-search-params';
+
+import { LoaderService } from '../../shared/services/loader.service';
 
 const mapper = {
-  fromBE: function (c: Object) {
+  fromBE: function (c: Record<string, any>): Course {
     return {
       creationDate: c['date'],
       description: c['description'],
@@ -20,7 +21,7 @@ const mapper = {
       topRated: c['isTopRated'],
     };
   },
-  toBE: function (c: Course): Object {
+  toBE: function (c: Course): Record<string, any> {
     return {
       date: moment(c.creationDate).toISOString(),
       description: c.description,
@@ -30,7 +31,7 @@ const mapper = {
       isTopRated: c.topRated,
     };
   }
-}
+};
 
 @Injectable({
   providedIn: 'root'
@@ -41,27 +42,29 @@ export class CourseService {
   /**
    *
    */
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private loaderService: LoaderService) {}
 
-  getCourses(options?: GetCoursesRequest): Observable<Course[]> {
+  getCourses(options?: CoursesSearchParams): Observable<Course[]> {
     return this.httpClient.get(`${this.BASE_URL}`, {
       params: {
         ...{
-          start: '0',
-          count: '10'
-        },
-        ...options
+          ...options,
+          count: options && options.count && options.count.toString(),
+          start: options && options.start && options.start.toString(),
+        }
       }
     }).pipe(
+      // to show loader component behavior
+      delay(2000),
       map(
-        (courses: Object[]) => {
+        (courses: Record<string, any>[]) => {
           return courses.map(mapper.fromBE);
         },
       )
     );
   }
 
-  createCourse(course: Course): Observable<Object> {
+  createCourse(course: Course): Observable<Record<string, any>> {
     return this.httpClient.post(`${this.BASE_URL}`, mapper.toBE(course));
   }
 
@@ -71,13 +74,11 @@ export class CourseService {
     );
   }
 
-  updateCourse(course: Course): Observable<Object> {
-    return this.httpClient.patch(`${this.BASE_URL}/${course.id}`, mapper.toBE(course));
+  updateCourse(course: Course): Observable<Record<string, any>> {
+    return this.httpClient.put(`${this.BASE_URL}/${course.id}`, mapper.toBE(course));
   }
 
-  removeCourse(id: Course['id']): Observable<Object> {
+  removeCourse(id: Course['id']): Observable<Record<string, any>> {
     return this.httpClient.delete(`${this.BASE_URL}/${id}`);
   }
-
-  private courses: Course[] = courses;
 }

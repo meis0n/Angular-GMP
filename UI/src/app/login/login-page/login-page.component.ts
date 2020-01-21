@@ -16,7 +16,7 @@ export class LoginPageComponent {
     private router: Router,
     ) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.authorizationService.isAuthenticated$.subscribe(isAuthentificated => {
       if (isAuthentificated) {
         this.redirectToCourses();
@@ -31,7 +31,7 @@ export class LoginPageComponent {
     );
   }
 
-  private redirectToCourses () {
+  private redirectToCourses (): void {
     this.router.navigateByUrl('courses');
   }
 }

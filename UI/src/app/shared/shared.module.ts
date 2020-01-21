@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { DurationInputComponent } from './components/duration-input/duration-input.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RouterModule } from '@angular/router';
     FilterByStringPipe,
     DurationInputComponent,
     NotFoundComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { RouterModule } from '@angular/router';
     OrderByPipe,
     FilterByStringPipe,
     NotFoundComponent,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }
