@@ -3,7 +3,7 @@ import { LocalStorageService } from './local-storage.service';
 import { User } from '../entities/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -12,24 +12,27 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthorizationService {
   private BASE_URL = 'auth';
   private storageKey = 'AUTH';
-  public isAuthenticated$ = new BehaviorSubject<boolean>(Boolean(this.getToken()));
 
-  async login(login: string, password: string): Promise<void> {
-    this.httpClient.post(`${this.BASE_URL}/login`, {
+  login(login: string, password: string): Observable<void> {
+    return this.httpClient.post(`${this.BASE_URL}/login`, {
       login,
       password,
-    }).subscribe(({ token }: { token: string}) => {
-      this.setToken(token);
-      this.isAuthenticated$.next(true);
-    });
+    }).pipe(
+      tap(({ token }: { token: string}) => {
+        this.setToken(token);
+      }),
+      map(() => null),
+    );
   }
+
   logout(): void {
     this.localStorage.reset(this.storageKey);
-    this.isAuthenticated$.next(false);
   }
 
   getCurrentUserInfo(): Observable<User> {
-    return this.httpClient.post(`${this.BASE_URL}/userinfo`, {}).pipe(
+    return this.httpClient.post(`${this.BASE_URL}/userinfo`, {
+      token: this.getToken(),
+    }).pipe(
       map((data: Record<string, any>): User => ({
           id: data['id'],
           login: data['login'],
@@ -46,7 +49,5 @@ export class AuthorizationService {
   getToken(): string {
     return this.localStorage.get(this.storageKey);
   }
-  constructor(private localStorage: LocalStorageService, private httpClient: HttpClient) {
-    this.isAuthenticated$.next(Boolean(this.getToken()));
-  }
+  constructor(private localStorage: LocalStorageService, private httpClient: HttpClient) {}
 }

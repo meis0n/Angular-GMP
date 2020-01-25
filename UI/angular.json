@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ANGULAR-GMP"
+    }
+  },
+  "defaultProject": "ANGULAR-GMP",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

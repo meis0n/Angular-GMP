@@ -5,9 +5,12 @@ import { Course } from '../../entities/course';
 import { CourseService } from '../../services/course.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { BehaviorSubject } from 'rxjs';
-import { CoursesStoreService } from '../../services/courses-store.service';
-import { debounceTime } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { debounceTime, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { getCoursesRequestStarted, getCoursesNextPage, deleteCourseRequestStarted } from '../../store/courses.actions';
+import { CoursesState } from '../../store/courses.reducer';
+import { selectAllCourses, selectSearchParams, selectCourseById } from '../../store/courses.selectors';
 
 @Component({
   selector: 'app-courses-page',
@@ -23,26 +26,36 @@ export class CoursesPageComponent implements OnInit {
   filter = new BehaviorSubject<string>('');
   //filter = new Observable<string>();
 
+  courses$: Observable<any>;
+
   private filterSubscrition: Subscription;
+  private deleteSubscrition: Subscription;
 
   constructor (
-    public coursesStoreService: CoursesStoreService,
+    // public coursesStoreService: CoursesStoreService,
     private coursesBackendService: CourseService,
-    private router: Router
+    private router: Router,
+    private store: Store<CoursesState>
   ) {}
 
   ngOnInit(): void {
     this.filterSubscrition = this.filter
     .pipe(
-      debounceTime(200)
+      debounceTime(200),
+      tap(value => {
+        if(!value.length || value.length >= 3) {
+          this.store.dispatch(getCoursesRequestStarted({
+            payload: {
+              textFragment: value,
+            }
+          }));
+        }
+      })
     )
-    .subscribe(value => {
-      if(!value.length || value.length >= 3) {
-        this.coursesStoreService.get({
-          textFragment: value,
-        });
-      }
-    });
+    .subscribe();
+
+    this.courses$ = this.store.pipe(select(selectAllCourses));
+    this.store.dispatch(getCoursesRequestStarted(null));
   }
 
   addCourse (): void {
@@ -54,17 +67,20 @@ export class CoursesPageComponent implements OnInit {
   }
 
   onCourseDelete (courseId: Course['id']): void {
-    this.coursesBackendService.getCourseById(courseId).subscribe(c => {
-      const isUserAgree = confirm(`Удалить курс ${c.title}`);
+    this.deleteSubscrition = this.store.pipe(
+      select(selectCourseById, { id: courseId }),
+      tap((course) => {
+        const isUserAgree = confirm(`Удалить курс ${course.title}`);
 
-      if (isUserAgree) {
-        this.coursesStoreService.removeCourse(courseId);
-      }
-    });
+        if (isUserAgree) {
+          this.store.dispatch(deleteCourseRequestStarted({ payload: courseId }));
+        }
+      })
+    ).subscribe();
   }
 
   onLoadMore (): void {
-    this.coursesStoreService.nextPage();
+    this.store.dispatch(getCoursesNextPage());
   }
 
   onSearch (): void {
@@ -73,5 +89,8 @@ export class CoursesPageComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.filterSubscrition.unsubscribe();
+    if(this.deleteSubscrition) {
+      this.deleteSubscrition.unsubscribe();
+    }
   }
 }

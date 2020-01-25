@@ -3,6 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../../entities/course';
 import { CourseService } from '../../services/course.service';
 import { CourseItem } from '../../entities/course-item';
+import { CoursesState } from '../../store/courses.reducer';
+import { Store, select } from '@ngrx/store';
+import { selectCourseById } from '../../store/courses.selectors';
+import { tap } from 'rxjs/operators';
+import { createCourseRequestStarted, updateCourseRequestStarted } from '../../store/courses.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-data-page',
@@ -18,10 +24,13 @@ export class CourseDataPageComponent {
 
   private mode: string;
 
+  private getCourseSubscription: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private courseServise: CourseService,
-    private router: Router
+    private router: Router,
+    private store: Store<CoursesState>
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -29,14 +38,16 @@ export class CourseDataPageComponent {
 
     if (this.isEditMode) {
       const id = this.route.snapshot.paramMap.get('id');
-      const data = await this.courseServise.getCourseById(id).subscribe(c => {
-        if(!data) {
-          this.router.navigateByUrl('404');
-        }
-        else {
-          this.data = c;
-        }
-      });
+      this.getCourseSubscription = this.courseServise.getCourseById(id).pipe(
+        tap(c => {
+          if(!c) {
+            this.router.navigateByUrl('404');
+          }
+          else {
+            this.data = c;
+          }
+        })
+      ).subscribe();
     }
   }
 
@@ -50,14 +61,19 @@ export class CourseDataPageComponent {
 
   async onSave (): Promise<void> {
     if (this.isEditMode) {
-      this.courseServise.updateCourse(this.data).subscribe(() => {
-        this.router.navigateByUrl('courses');
-      });
+      this.store.dispatch(updateCourseRequestStarted({ payload: this.data }));
     }
     else {
-      this.courseServise.createCourse(this.data).subscribe(() => {
-        this.router.navigateByUrl('courses');
-      });
+      this.store.dispatch(createCourseRequestStarted({ payload: this.data }));
+    }
+    this.router.navigateByUrl('courses');
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    if(this.getCourseSubscription) {
+      this.getCourseSubscription.unsubscribe();
     }
   }
 }
