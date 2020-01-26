@@ -10,11 +10,14 @@ import { HighlightStatusDirective } from './directives/highlight-status.directiv
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterByStringPipe } from './pipes/filter-by-string.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DurationInputComponent } from './components/duration-input/duration-input.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ShowValidationMessageDirective } from './directives/show-validation-message.directive';
+import { ShareFormSubmitEventDirective } from './directives/share-form-submit-event.directive';
+import { ControlErrorComponent } from './components/control-error/control-error.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +33,21 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     DurationInputComponent,
     NotFoundComponent,
     SpinnerComponent,
+    ShowValidationMessageDirective,
+    ShareFormSubmitEventDirective,
+    ControlErrorComponent,
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
     RouterModule
   ],
+  entryComponents: [ControlErrorComponent],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
     LogoComponent,
     HeaderComponent,
     FooterComponent,
@@ -46,6 +56,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     DurationInputComponent,
     FontAwesomeModule,
     HighlightStatusDirective,
+    ShowValidationMessageDirective,
+    ShareFormSubmitEventDirective,
     DurationPipe,
     OrderByPipe,
     FilterByStringPipe,

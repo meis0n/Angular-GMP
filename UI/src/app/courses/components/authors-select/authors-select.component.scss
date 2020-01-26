@@ -1,0 +1,39 @@
+.authors-select {
+  display: flex;
+  position: relative;
+  width: fit-content;
+
+  .selected-author {
+    display: flex;
+    background: #2eb6dd;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    border: solid 1px #d9dbe3;
+    border-right: 0;
+    color: white;
+    padding: 15px;
+
+    .icon {
+      margin-left: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 47px;
+    width: 100%;
+  }
+
+  .suggestion {
+    border-radius: 3px;
+    border: solid 1px #d9dbe3;
+    background: white;
+    padding: 4px;
+
+    &:hover{
+      background: darken(white, 20%);
+    }
+  }
+}

@@ -1,18 +1,18 @@
-<div class="courses-page container login-page">
+<form class="courses-page container login-page" [formGroup]="form" (ngSubmit)="onLogin()">
   <div class="panel login-form">
     <div>
       <div>
         <label class="input-label">E-mail</label>
-        <input class="input" [(ngModel)]="email"/>
+        <input class="input" formControlName="login"/>
       </div>
       <div>
         <label class="input-label">Password</label>
-        <input class="input" [(ngModel)]="login"/>
+        <input class="input" formControlName="password"/>
       </div>
     </div>
     <div class="footer">
       <div class="button button--link reset-pass-btn">Forgot password?</div>
-      <div class="button button--primary" (click)="onLogin()">Login</div>
+      <button type="submit" class="button button--primary">Login</button>
     </div>
   </div>
-</div>
+</form>
