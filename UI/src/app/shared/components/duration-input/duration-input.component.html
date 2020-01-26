@@ -1,2 +1,2 @@
-<input class="input" type="number" [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)"/>
+<input class="input" type="number" [value]="value" (onChange)="onChange($event)" (keyup)="onChange($event)" (focus)="onTouch()"/>
 <span>{{ value | duration}}</span>

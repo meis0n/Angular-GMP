@@ -11,6 +11,7 @@ import { Store, select } from '@ngrx/store';
 import { getCoursesRequestStarted, getCoursesNextPage, deleteCourseRequestStarted } from '../../store/courses.actions';
 import { CoursesState } from '../../store/courses.reducer';
 import { selectAllCourses, selectSearchParams, selectCourseById } from '../../store/courses.selectors';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-courses-page',
@@ -22,9 +23,7 @@ export class CoursesPageComponent implements OnInit {
 
   allCoursesAmount = 0;
 
-  filterInput = '';
-  filter = new BehaviorSubject<string>('');
-  //filter = new Observable<string>();
+  filter = new FormControl('');
 
   courses$: Observable<any>;
 
@@ -32,14 +31,12 @@ export class CoursesPageComponent implements OnInit {
   private deleteSubscrition: Subscription;
 
   constructor (
-    // public coursesStoreService: CoursesStoreService,
-    private coursesBackendService: CourseService,
     private router: Router,
     private store: Store<CoursesState>
   ) {}
 
   ngOnInit(): void {
-    this.filterSubscrition = this.filter
+    this.filterSubscrition = this.filter.valueChanges
     .pipe(
       debounceTime(200),
       tap(value => {
@@ -81,10 +78,6 @@ export class CoursesPageComponent implements OnInit {
 
   onLoadMore (): void {
     this.store.dispatch(getCoursesNextPage());
-  }
-
-  onSearch (): void {
-    this.filter.next(this.filterInput);
   }
 
   ngOnDestroy(): void {

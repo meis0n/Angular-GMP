@@ -93,7 +93,7 @@ export class CoursesEffects {
       return createEffect(() =>
           this.actions.pipe(
               ofType(updateCourseRequestStarted.type),
-              mergeMap(({ payload }: { payload: Course}) =>
+              mergeMap(({ payload }: { payload: Partial<Course>}) =>
                   this.coursesService.updateCourse(payload).pipe(
                       catchError(() => of(undefined))
                   )

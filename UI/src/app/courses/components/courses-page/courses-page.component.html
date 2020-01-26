@@ -1,6 +1,6 @@
 <div class="courses-page container">
     <div class="courses-filter-form">
-      <input class="input input-search" type="text" placeholder="Text to search" [(ngModel)]="filterInput" (keyup)="onSearch()">
+      <input class="input input-search" type="text" placeholder="Text to search" [formControl]="filter">
     </div>
     <div class="courses-page-actions">
       <div data-test-id="AddCourse" class="button button--secondary" (click)="addCourse()"><fa-icon class="icon" [icon] ="faPlus"></fa-icon>Add course</div>

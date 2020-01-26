@@ -38,6 +38,7 @@ export class AuthorizationService {
           login: data['login'],
           firstName: data['name.first'],
           lastName: data['name.last'],
+          fullName: `${data['name.first']} ${data['name.last']}`,
           email: data['login'],
         })
       )

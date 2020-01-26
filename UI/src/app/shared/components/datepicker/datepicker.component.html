@@ -1,1 +1,1 @@
-<input class="input" type="date" [ngModel]="value | date:'yyyy-MM-dd'" (ngModelChange)="valueChange.emit(value)">
+<input class="input" [value]="value" (onChange)="onChange($event)" (keyup)="onChange($event)" (focus)="onTouch()">

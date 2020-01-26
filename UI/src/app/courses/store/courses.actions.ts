@@ -50,7 +50,7 @@ export const createCourseRequestSuccess = createAction(
 
 export const updateCourseRequestStarted = createAction(
   CoursesActionTypes.UpdateCourseRequestStarted,
-  props<{ payload: Course }>()
+  props<{ payload: Partial<Course> }>()
 );
 
 export const updateCourseRequestSuccess = createAction(

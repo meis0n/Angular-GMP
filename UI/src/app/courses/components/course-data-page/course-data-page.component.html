@@ -1,23 +1,31 @@
 <div class="container">
-  <div class="panel ">
-    <div>
-      <label class="input-label">Title:</label>
-      <input class="input" [(ngModel)]="data.title"/>
+  <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div class="panel ">
+      <div>
+        <label class="input-label">Title:</label>
+        <textarea class="input" formControlName="title"> </textarea>
+      </div>
+      <div>
+        <label class="input-label">Description:</label>
+        <textarea class="input" formControlName="description"> </textarea>
+      </div>
+      <div>
+        <label class="input-label">Date:</label>
+        <app-datepicker formControlName="creationDate"></app-datepicker>
+      </div>
+      <div>
+        <label class="input-label">Duration:</label>
+        <app-duration-input formControlName="durationMin"></app-duration-input>
+      </div>
+      <div>
+        <label class="input-label">Authors:</label>
+        <app-authors-select formControlName="authors" [options]="authors$ | async" ></app-authors-select>
+      </div>
+      <div class="footer">
+        <div class="button button--link" (click)="onCancel()">Cancel</div>
+        <button type="submit" class="button button--primary">Save</button>
+      </div>
     </div>
-    <div>
-      <label class="input-label">Description:</label>
-      <textarea class="input" [(ngModel)]="data.description"> </textarea>
-    </div>
-    <div>
-      <label class="input-label">Date:</label>
-      <app-datepicker [(value)]="data.creationDate"></app-datepicker>
-    </div>
-    <div>
-      <label class="input-label">Duration:</label>
-      <app-duration-input type="number" [(value)]="data.durationMin"></app-duration-input>
-    </div>
-  <div class="footer">
-    <div class="button button--link" (click)="onCancel()">Cancel</div>
-    <div class="button button--primary" (click)="onSave()">Save</div>
-  </div>
+  </form>
+
 </div>

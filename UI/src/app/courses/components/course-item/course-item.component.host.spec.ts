@@ -16,7 +16,7 @@ import { By } from '@angular/platform-browser';
 })
 class TestHostCourseItemComponent {
   public course: Course = {
-    creationDate: new Date(),
+    creationDate: '',
     description: 'Lorem ipsum',
     durationMin: 120,
     id: '1',

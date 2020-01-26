@@ -29,7 +29,7 @@ export const login = createAction(
   ProfileActionTypes.Login,
   props<{ payload: {
     login: string,
-    email: string,
+    password: string,
   }}>()
 );
 

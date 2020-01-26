@@ -22,8 +22,8 @@ export class RootEffects {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(login.type),
-                mergeMap(({ payload }: { payload: { login: string, email: string }}) =>
-                    this.authService.login(payload.login, payload.email).pipe(
+                mergeMap(({ payload }: { payload: { login: string, password: string }}) =>
+                    this.authService.login(payload.login, payload.password).pipe(
                         catchError(() => of(undefined))
                     )
                 ),
