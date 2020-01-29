@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RootState } from './store';
 import { Store } from '@ngrx/store';
 import { getUserData } from './store/root.actions';
@@ -8,18 +8,12 @@ import { getUserData } from './store/root.actions';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ANGULAR-GMP';
 
-  /**
-   *
-   */
-  constructor(private store: Store<RootState>) {
+  constructor(private store: Store<RootState>) {}
 
-  }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.store.dispatch(getUserData());
   }
 }
