@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { map, mergeMap, catchError, filter, tap, withLatestFrom, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { CourseService } from '../services/course.service';
-import { getCoursesRequestSuccess, setCourses, getCoursesRequestStarted, getCoursesNextPage, createCourseRequestStarted, createCourseRequestSuccess, updateCourseRequestStarted, updateCourseRequestSuccess, deleteCourseRequestStarted, deleteCourseRequestSuccess } from './courses.actions';
+import { getCoursesRequestSuccess, setCourses, getCoursesRequestStarted, getCoursesNextPage, createCourseRequestStarted, createCourseRequestSuccess, updateCourseRequestStarted, updateCourseRequestSuccess, deleteCourseRequestStarted, deleteCourseRequestSuccess, CoursesActionTypes } from './courses.actions';
 import { Course } from '../entities/course';
-import { CoursesSearchParams } from '../entities/courses-search-params';
 import { Store, select } from '@ngrx/store';
 import { CoursesState } from './courses.reducer';
 import { selectSearchParams } from './courses.selectors';
+import { TypedAction } from '@ngrx/store/src/models';
 
 @Injectable()
 export class CoursesEffects {
@@ -27,12 +27,12 @@ export class CoursesEffects {
     public deleteCourse$ = this.deleteCourse();
     public deleteCourseSuccess$ = this.deleteCourseSuccess();
 
-    private getAllCourses() {
+    private getAllCourses(): Observable<TypedAction<CoursesActionTypes.GetCoursesRequestSuccess>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(getCoursesRequestStarted.type),
                 withLatestFrom(this.store.pipe(select(selectSearchParams))),
-                mergeMap(([initial, searchParams]) =>
+                mergeMap(([, searchParams]) =>
                     this.coursesService.getCourses(searchParams).pipe(
                         catchError(() => of(undefined))
                     )
@@ -44,43 +44,43 @@ export class CoursesEffects {
         );
     }
 
-    private nextPage() {
-      return createEffect(() =>
-          this.actions.pipe(
-              ofType(getCoursesNextPage.type),
-              map(() => {
-                  return getCoursesRequestStarted(null);
-              })
-          )
-      );
+    private nextPage(): Observable<TypedAction<CoursesActionTypes.GetCoursesRequestStarted>> {
+        return createEffect(() =>
+            this.actions.pipe(
+                ofType(getCoursesNextPage.type),
+                map(() => {
+                    return getCoursesRequestStarted(null);
+                })
+            )
+        );
     }
 
-    private addCourses() {
+    private addCourses(): Observable<TypedAction<CoursesActionTypes.SetCourses>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(getCoursesRequestSuccess.type),
                 map(({ payload }: { payload: Course[] }) =>
-                  setCourses({ payload })
+                    setCourses({ payload })
                 )
             )
         );
     }
 
-    private createCourse() {
-      return createEffect(() =>
-          this.actions.pipe(
-              ofType(createCourseRequestStarted.type),
-              mergeMap(({ payload }: { payload: Course}) =>
-                  this.coursesService.createCourse(payload).pipe(
-                      catchError(() => of(undefined))
-                  )
-              ),
-              map(() => createCourseRequestSuccess())
-          )
-      );
-  }
+    private createCourse(): Observable<TypedAction<CoursesActionTypes.AddCourseRequestSuccess>> {
+        return createEffect(() =>
+            this.actions.pipe(
+                ofType(createCourseRequestStarted.type),
+                mergeMap(({ payload }: { payload: Course}) =>
+                    this.coursesService.createCourse(payload).pipe(
+                        catchError(() => of(undefined))
+                    )
+                ),
+                map(() => createCourseRequestSuccess())
+            )
+        );
+    }
 
-    private addCourse() {
+    private addCourse(): Observable<TypedAction<CoursesActionTypes.GetCoursesRequestStarted>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(createCourseRequestSuccess.type),
@@ -89,21 +89,21 @@ export class CoursesEffects {
         );
     }
 
-    private updateCourse() {
-      return createEffect(() =>
-          this.actions.pipe(
-              ofType(updateCourseRequestStarted.type),
-              mergeMap(({ payload }: { payload: Course}) =>
-                  this.coursesService.updateCourse(payload).pipe(
-                      catchError(() => of(undefined))
-                  )
-              ),
-              map(() => updateCourseRequestSuccess())
-          )
-      );
+    private updateCourse(): Observable<TypedAction<CoursesActionTypes.UpdateCourseRequestSuccess>> {
+        return createEffect(() =>
+            this.actions.pipe(
+                ofType(updateCourseRequestStarted.type),
+                mergeMap(({ payload }: { payload: Course}) =>
+                    this.coursesService.updateCourse(payload).pipe(
+                        catchError(() => of(undefined))
+                    )
+                ),
+                map(() => updateCourseRequestSuccess())
+            )
+        );
     }
 
-    private updateCourseSuccess() {
+    private updateCourseSuccess(): Observable<TypedAction<CoursesActionTypes.GetCoursesRequestStarted>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(updateCourseRequestSuccess.type),
@@ -112,21 +112,21 @@ export class CoursesEffects {
         );
     }
 
-    private deleteCourse() {
-      return createEffect(() =>
-          this.actions.pipe(
-              ofType(deleteCourseRequestStarted.type),
-              mergeMap(({ payload }: { payload: Course['id']}) =>
-                  this.coursesService.removeCourse(payload).pipe(
-                      catchError(() => of(undefined))
-                  )
-              ),
-              map(() => deleteCourseRequestSuccess())
-          )
-      );
+    private deleteCourse(): Observable<TypedAction<CoursesActionTypes.DeleteCourseRequestSuccess>> {
+        return createEffect(() =>
+            this.actions.pipe(
+                ofType(deleteCourseRequestStarted.type),
+                mergeMap(({ payload }: { payload: Course['id']}) =>
+                    this.coursesService.removeCourse(payload).pipe(
+                        catchError(() => of(undefined))
+                    )
+                ),
+                map(() => deleteCourseRequestSuccess())
+            )
+        );
     }
 
-    private deleteCourseSuccess() {
+    private deleteCourseSuccess(): Observable<TypedAction<CoursesActionTypes.GetCoursesRequestStarted>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(deleteCourseRequestSuccess.type),

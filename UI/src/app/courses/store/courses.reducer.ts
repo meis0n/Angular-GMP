@@ -6,8 +6,8 @@ import { EntityState } from '@ngrx/entity';
 import { CoursesSearchParams } from '../entities/courses-search-params';
 
 export interface CoursesState {
-  searchParams: CoursesSearchParams,
-  data: EntityState<Course>
+  searchParams: CoursesSearchParams;
+  data: EntityState<Course>;
 }
 
 export const coursesFeatureKey = 'courses';
@@ -43,13 +43,13 @@ export const searchParamsReducerFn = createReducer(
         return {
           ...state,
           ...(payload || {})
-        }
+        };
     }),
     on(getCoursesNextPage, (state) => {
       return {
         ...state,
         count: state.count + 10,
-      }
+      };
   })
 );
 
@@ -65,4 +65,4 @@ export function searchParamsReducer(
 export const reducers: ActionReducerMap<CoursesState> = {
   searchParams: searchParamsReducer,
   data: coursesReducer,
-}
+};

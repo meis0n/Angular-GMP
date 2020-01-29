@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Breadcrumb } from '../../entities/breadcrumb';
 import { isFunction } from 'util';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-breadcrumbs',

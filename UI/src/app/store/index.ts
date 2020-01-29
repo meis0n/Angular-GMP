@@ -1,8 +1,5 @@
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer,
   createReducer,
   on,
@@ -20,7 +17,7 @@ const userReducerFn = createReducer(
       ...payload
     } : null;
   }),
-)
+);
 
 
 export function profileReducer(
@@ -31,7 +28,7 @@ export function profileReducer(
 }
 
 export interface RootState {
-  user: User | null
+  user: User | null;
 }
 
 export const reducers: ActionReducerMap<RootState> = {

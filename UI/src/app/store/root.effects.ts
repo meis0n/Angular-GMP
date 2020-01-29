@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { map, mergeMap, catchError, filter, tap, withLatestFrom, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map, mergeMap, catchError, tap, } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
 import { AuthorizationService } from '../shared/services/authorization.service';
-import { RootState } from '.';
-import { login, getUserData, setUserData, getUserDataSuccess, logout } from './root.actions';
+import { login, getUserData, setUserData, getUserDataSuccess, logout, ProfileActionTypes } from './root.actions';
 import { User } from '../shared/entities/user';
+import { TypedAction } from '@ngrx/store/src/models';
 
 @Injectable()
 export class RootEffects {
@@ -18,11 +17,11 @@ export class RootEffects {
     public getProfileData$ = this.getProfileData();
     public setProfile$ = this.setProfile();
 
-    private login() {
+    private login(): Observable<TypedAction<ProfileActionTypes.GetUserData>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(login.type),
-                mergeMap(({ payload }: { payload: { login: string, email: string }}) =>
+                mergeMap(({ payload }: { payload: { login: string; email: string }}) =>
                     this.authService.login(payload.login, payload.email).pipe(
                         catchError(() => of(undefined))
                     )
@@ -34,20 +33,20 @@ export class RootEffects {
         );
     }
 
-    private logout() {
-      return createEffect(() =>
-          this.actions.pipe(
-              ofType(logout.type),
-              tap(() => this.authService.logout()),
-              map(() => {
-                  return setUserData({ payload: null});
-              })
-          )
-      );
+    private logout(): Observable<TypedAction<ProfileActionTypes.SetUserData>> {
+        return createEffect(() =>
+            this.actions.pipe(
+                ofType(logout.type),
+                tap(() => this.authService.logout()),
+                map(() => {
+                    return setUserData({ payload: null});
+                })
+            )
+        );
     }
 
-    private getProfileData() {
-      return createEffect(() =>
+    private getProfileData(): Observable<TypedAction<ProfileActionTypes.GetUserDataSuccess>> {
+        return createEffect(() =>
             this.actions.pipe(
                 ofType(getUserData.type),
                 mergeMap(() =>
@@ -60,14 +59,14 @@ export class RootEffects {
                 })
             )
         );
-  }
+    }
 
-    private setProfile() {
+    private setProfile(): Observable<TypedAction<ProfileActionTypes.SetUserData>> {
         return createEffect(() =>
             this.actions.pipe(
                 ofType(getUserDataSuccess.type),
                 map(({ payload }: { payload: User | null }) =>
-                  setUserData({ payload })
+                    setUserData({ payload })
                 )
             )
         );

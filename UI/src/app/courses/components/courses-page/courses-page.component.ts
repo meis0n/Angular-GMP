@@ -6,11 +6,11 @@ import { CourseService } from '../../services/course.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, tap } from 'rxjs/operators';
+import { debounceTime, tap, filter } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { getCoursesRequestStarted, getCoursesNextPage, deleteCourseRequestStarted } from '../../store/courses.actions';
 import { CoursesState } from '../../store/courses.reducer';
-import { selectAllCourses, selectSearchParams, selectCourseById } from '../../store/courses.selectors';
+import { selectAllCourses, selectCourseById } from '../../store/courses.selectors';
 
 @Component({
   selector: 'app-courses-page',

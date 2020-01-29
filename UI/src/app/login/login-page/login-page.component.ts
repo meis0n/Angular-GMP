@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { AuthorizationService } from 'src/app/shared/services/authorization.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { RootState } from 'src/app/store';
 import { login } from 'src/app/store/root.actions';
 import { selectIsAuthenticated } from 'src/app/store/root.selectors';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-page',

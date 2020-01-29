@@ -28,9 +28,9 @@ export const setUserData = createAction(
 export const login = createAction(
   ProfileActionTypes.Login,
   props<{ payload: {
-    login: string,
-    email: string,
-  }}>()
+    login: string;
+    email: string;
+  };}>()
 );
 
 export const logout = createAction(

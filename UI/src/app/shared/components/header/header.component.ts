@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthorizationService } from '../../services/authorization.service';
 import { Router } from '@angular/router';
 import { User } from '../../entities/user';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { RootState } from 'src/app/store';
 import { logout } from 'src/app/store/root.actions';
-import { map } from 'rxjs/operators';
 import { selectIsAuthenticated } from 'src/app/store/root.selectors';
 
 @Component({
