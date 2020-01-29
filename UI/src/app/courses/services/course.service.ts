@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Course } from '../entities/course';
 import { HttpClient } from '@angular/common/http';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
 import * as moment from 'moment';
@@ -45,6 +45,7 @@ export class CourseService {
   constructor(private httpClient: HttpClient, private loaderService: LoaderService) {}
 
   getCourses(options?: CoursesSearchParams): Observable<Course[]> {
+    const session = this.loaderService.add();
     return this.httpClient.get(`${this.BASE_URL}`, {
       params: {
         ...{
@@ -55,12 +56,13 @@ export class CourseService {
       }
     }).pipe(
       // to show loader component behavior
-      delay(2000),
+      delay(500),
+      tap(() => this.loaderService.resolve(session)),
       map(
         (courses: Record<string, any>[]) => {
           return courses.map(mapper.fromBE);
         },
-      )
+      ),
     );
   }
 

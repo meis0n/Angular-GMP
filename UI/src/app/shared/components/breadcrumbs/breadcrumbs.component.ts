@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Breadcrumb } from '../../entities/breadcrumb';
 import { isFunction } from 'util';
 import { Subscription } from 'rxjs';
+import { tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -18,11 +19,10 @@ export class BreadcrumbsComponent {
 
   ngOnInit(): void {
     this.buildBreadCrumb();
-    this.routerSubscription = this.router.events.subscribe((event) => {
-      if( event instanceof NavigationEnd) {
-        this.buildBreadCrumb();
-      }
-    });
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      tap(() => this.buildBreadCrumb()),
+    ).subscribe();
   }
 
   buildBreadCrumb(route: ActivatedRoute = this.activatedRoute.root, url = '',
