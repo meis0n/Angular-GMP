@@ -20,11 +20,8 @@ export class BreadcrumbsComponent {
   ngOnInit(): void {
     this.buildBreadCrumb();
     this.routerSubscription = this.router.events.pipe(
-      tap((event) => {
-        if( event instanceof NavigationEnd) {
-          this.buildBreadCrumb();
-        }
-      })
+      filter(event => event instanceof NavigationEnd),
+      tap(() => this.buildBreadCrumb()),
     ).subscribe();
   }
 

@@ -26,11 +26,8 @@ export class LoginPageComponent {
 
   ngOnInit(): void {
     this.isAuthenticatedSubscription = this.store.select(selectIsAuthenticated).pipe(
-      tap(isAuthenticated => {
-        if (isAuthenticated) {
-          this.redirectToCourses();
-        }
-      })
+      filter(isAuthenticated => isAuthenticated),
+      tap(() => this.redirectToCourses())
     ).subscribe();
   }
 

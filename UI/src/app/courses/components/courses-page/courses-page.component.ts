@@ -26,7 +26,7 @@ export class CoursesPageComponent implements OnInit {
   filter = new BehaviorSubject<string>('');
   //filter = new Observable<string>();
 
-  courses$: Observable<any>;
+  courses$: Observable<Course[]>;
 
   private filterSubscrition: Subscription;
   private deleteSubscrition: Subscription;
@@ -42,14 +42,13 @@ export class CoursesPageComponent implements OnInit {
     this.filterSubscrition = this.filter
     .pipe(
       debounceTime(200),
+      filter(v => !v.length || v.length >= 3),
       tap(value => {
-        if(!value.length || value.length >= 3) {
-          this.store.dispatch(getCoursesRequestStarted({
-            payload: {
-              textFragment: value,
-            }
-          }));
-        }
+        this.store.dispatch(getCoursesRequestStarted({
+          payload: {
+            textFragment: value,
+          }
+        }));
       })
     )
     .subscribe();
@@ -69,12 +68,9 @@ export class CoursesPageComponent implements OnInit {
   onCourseDelete (courseId: Course['id']): void {
     this.deleteSubscrition = this.store.pipe(
       select(selectCourseById, { id: courseId }),
-      tap((course) => {
-        const isUserAgree = confirm(`Удалить курс ${course.title}`);
-
-        if (isUserAgree) {
-          this.store.dispatch(deleteCourseRequestStarted({ payload: courseId }));
-        }
+      filter(course => confirm(`Удалить курс ${course.title}`)),
+      tap(() => {
+         this.store.dispatch(deleteCourseRequestStarted({ payload: courseId }));
       })
     ).subscribe();
   }
